@@ -1,0 +1,21 @@
+diff -up rsyslog.service.in.orig rsyslog.service.in
+--- rsyslog.service.in.orig	2015-07-08 16:31:07.000000000 +0200
++++ rsyslog.service.in	2016-02-10 11:20:05.000000000 +0100
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=System Logging Service
+-Requires=syslog.socket
++;Requires=syslog.socket
+ Documentation=man:rsyslogd(8)
+ Documentation=http://www.rsyslog.com/doc/
+ 
+@@ -9,7 +9,8 @@ Type=notify
+ ExecStart=@sbindir@/rsyslogd -n
+ StandardOutput=null
+ Restart=on-failure
++UMask=0066
+ 
+ [Install]
+ WantedBy=multi-user.target
+-Alias=syslog.service
++;Alias=syslog.service
