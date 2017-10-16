@@ -13,7 +13,7 @@
 Summary: Enhanced system logging and kernel message trapping daemon
 Name: rsyslog
 Version: 8.29.0
-Release: 2%{?dist}
+Release: 4%{?dist}
 License: (GPLv3+ and ASL 2.0)
 URL: http://www.rsyslog.com/
 Source0: http://www.rsyslog.com/files/download/rsyslog/%{name}-%{version}.tar.gz
@@ -263,6 +263,8 @@ The rsyslog-kafka package provides module for Apache Kafka output.
 
 %prep
 %autosetup -p1
+%setup -q -DT -a1
+mv build doc
 
 %build
 autoreconf -iv
