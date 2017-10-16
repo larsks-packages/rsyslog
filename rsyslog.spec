@@ -13,16 +13,17 @@
 Summary: Enhanced system logging and kernel message trapping daemon
 Name: rsyslog
 Version: 8.29.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: (GPLv3+ and ASL 2.0)
 URL: http://www.rsyslog.com/
 Source0: http://www.rsyslog.com/files/download/rsyslog/%{name}-%{version}.tar.gz
 Source1: http://www.rsyslog.com/files/download/rsyslog/%{name}-doc-%{version}.tar.gz
 Source2: rsyslog.conf
-Source3: rsyslog.logrotate
 
 Patch0001: 0001-do-not-require-syslog.socket.patch
 Patch0002: 0002-do-not-call-fjson_object_put-from-jsonMerge.patch
+
+Source3: rsyslog.logrotate
 
 BuildRequires: autoconf
 BuildRequires: automake
@@ -514,3 +515,7 @@ done
 %{_libdir}/rsyslog/omkafka.so
 
 %changelog
+* Mon Oct 16 2017 Lars Kellogg-Stedman <lars@redhat.com> 8.29.0-2
+- do not call fjson_object_put from jsonMerge
+- do not require syslog.socket
+

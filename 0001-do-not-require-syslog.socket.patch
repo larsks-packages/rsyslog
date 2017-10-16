@@ -1,0 +1,21 @@
+From 56ccc09a7f8c0cd78992fecc0fb4c3469bc1fd30 Mon Sep 17 00:00:00 2001
+From: Lars Kellogg-Stedman <lars@redhat.com>
+Date: Tue, 10 Oct 2017 00:26:31 -0400
+Subject: [PATCH] do not require syslog.socket
+
+On CentOS/RHEL/etc 7 (and on Fedora), journald owns the syslog socket.
+---
+ rsyslog.service.in | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/rsyslog.service.in b/rsyslog.service.in
+index cb629ee..3400159 100644
+--- a/rsyslog.service.in
++++ b/rsyslog.service.in
+@@ -1,6 +1,5 @@
+ [Unit]
+ Description=System Logging Service
+-Requires=syslog.socket
+ Documentation=man:rsyslogd(8)
+ Documentation=http://www.rsyslog.com/doc/
+ 

@@ -1,0 +1,29 @@
+From f94c4d70367ffc8b26cd39467efe723813e92673 Mon Sep 17 00:00:00 2001
+From: Lars Kellogg-Stedman <lars@redhat.com>
+Date: Tue, 10 Oct 2017 00:24:28 -0400
+Subject: [PATCH] do not call fjson_object_put from jsonMerge
+
+MsgSetPropsViaJSON_Object will call fjson_object_put on an ancestor of
+the tree seen by jsonMerge.
+
+Closes #1822
+---
+ runtime/msg.c | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/runtime/msg.c b/runtime/msg.c
+index 7309744..ad87f76 100644
+--- a/runtime/msg.c
++++ b/runtime/msg.c
+@@ -4692,11 +4692,6 @@ jsonMerge(struct json_object *existing, struct json_object *json)
+ 			json_object_get(json_object_iter_peek_value(&it)));
+ 		json_object_iter_next(&it);
+ 	}
+-	/* note: json-c does ref counting. We added all descandants refcounts
+-	 * in the loop above. So when we now free(_put) the root object, only
+-	 * root gets freed().
+-	 */
+-	json_object_put(json);
+ 	RETiRet;
+ }
+ 
